@@ -1,4 +1,7 @@
 from pprint import pprint
+import random
+
+new_sudoku = [[-1 for col in range(9)] for row in range(9)]
 
 def find_next_empty(puzzle):
     # finds the next row, col on puzzle that's not filled yet --> we represent these with -1
@@ -50,6 +53,30 @@ def solve_sudoku(puzzle):
         puzzle[row][col] = -1
             
     return False
+
+def sudoku_generator():
+    example_solution = [
+            [3, 9, 1, 8, 5, 6, 4, 2, 7],
+            [8, 6, 7, 2, 3, 4, 9, 1, 5],
+            [4, 2, 5, 7, 1, 9, 6, 8, 3],
+            
+            [7, 5, 4, 9, 6, 8, 1, 3, 2],
+            [2, 1, 6, 4, 7, 3, 5, 9, 8],
+            [9, 3, 8, 5, 2, 1, 7, 6, 4],
+            
+            [5, 4, 3, 6, 9, 2, 8, 7, 1],
+            [6, 7, 2, 1, 8, 5, 3, 4, 9],
+            [1, 8, 9, 3, 4, 7, 2, 5, 6]
+        ]
+    
+    for x in range(3):
+        order = [0+(x*3), 1+(x*3), 2+(x*3)]
+        random.shuffle(order)  
+        example_solution[0+(x*3)], example_solution[1+(x*3)], example_solution[2+(x*3)] = example_solution[order[0]], example_solution[order[1]], example_solution[order[2]]
+    
+    
+    print(solve_sudoku(example_solution))
+    pprint(example_solution)            
     
 if __name__ == '__main__':
     example_board = [
@@ -65,5 +92,7 @@ if __name__ == '__main__':
         [6, 7, -1,   1, -1, 5,   -1, 4, -1],
         [1, -1, 9,   -1, -1, -1,   2, -1, -1]
     ]
-    print(solve_sudoku(example_board))
-    pprint(example_board)
+    #print(solve_sudoku(example_board))
+    #pprint(example_board)
+
+    pprint(sudoku_generator())
