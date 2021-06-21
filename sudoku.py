@@ -69,14 +69,79 @@ def sudoku_generator():
             [1, 8, 9, 3, 4, 7, 2, 5, 6]
         ]
     
+    swap_row(example_solution)
+    swap_row_block(example_solution)
+    swap_col(example_solution)
+    swap_col_block(example_solution)
+    
+    pprint(example_solution)
+
+def swap_row(puzzle):
     for x in range(3):
         order = [0+(x*3), 1+(x*3), 2+(x*3)]
         random.shuffle(order)  
-        example_solution[0+(x*3)], example_solution[1+(x*3)], example_solution[2+(x*3)] = example_solution[order[0]], example_solution[order[1]], example_solution[order[2]]
+        puzzle[0+(x*3)], puzzle[1+(x*3)], puzzle[2+(x*3)] = puzzle[order[0]], puzzle[order[1]], puzzle[order[2]]
+
+def swap_row_block(puzzle):
+    origin_order = [0, 3, 6]
+    order = [0, 3, 6]
+    random.shuffle(order) 
     
+    for y in range(3):
+        if origin_order[y] != order[y]:
+            puzzle[origin_order[y]],\
+            puzzle[origin_order[y]+1],\
+            puzzle[origin_order[y]+2],\
+            puzzle[order[y]],\
+            puzzle[order[y]+1],\
+            puzzle[order[y]+2] = \
+                puzzle[order[y]],\
+                puzzle[order[y]+1],\
+                puzzle[order[y]+2],\
+                puzzle[origin_order[y]],\
+                puzzle[origin_order[y]+1],\
+                puzzle[origin_order[y]+2]
+
+def swap_col(puzzle):       
+    for z in range(3):
+        origin_order = [0+(z*3), 1+(z*3), 2+(z*3)]
+        order = [0+(z*3), 1+(z*3), 2+(z*3)]
+        random.shuffle(order)
+                    
+        first_col = [i[order[0]] for i in puzzle]
+        second_col = [i[order[1]] for i in puzzle]
+        third_col = [i[order[2]] for i in puzzle]
+                
+        for l in range(9):
+            puzzle[l][origin_order[0]] = first_col[l]
+            puzzle[l][origin_order[1]] = second_col[l]
+            puzzle[l][origin_order[2]] = third_col[l]
+
+def swap_col_block(puzzle):         
+    origin_order = [0, 3, 6]
+    order = [0, 3, 6]
+    random.shuffle(order) 
     
-    print(solve_sudoku(example_solution))
-    pprint(example_solution)            
+    block1_first_col = [i[order[0]] for i in puzzle]
+    block1_second_col = [i[order[0]+1] for i in puzzle]
+    block1_third_col = [i[order[0]+2] for i in puzzle]
+    block2_first_col = [i[order[1]] for i in puzzle]
+    block2_second_col = [i[order[1]+1] for i in puzzle]
+    block2_third_col = [i[order[1]+2] for i in puzzle]
+    block3_first_col = [i[order[2]] for i in puzzle]
+    block3_second_col = [i[order[2]+1] for i in puzzle]
+    block3_third_col = [i[order[2]+2] for i in puzzle]
+    
+    for l in range(9):
+        puzzle[l][origin_order[0]] = block1_first_col[l]
+        puzzle[l][origin_order[0]+1] =  block1_second_col[l]
+        puzzle[l][origin_order[0]+2] = block1_third_col[l]
+        puzzle[l][origin_order[1]] = block2_first_col[l]
+        puzzle[l][origin_order[1]+1] = block2_second_col[l]
+        puzzle[l][origin_order[1]+2] = block2_third_col[l]
+        puzzle[l][origin_order[2]] = block3_first_col[l]
+        puzzle[l][origin_order[2]+1] = block3_second_col[l]
+        puzzle[l][origin_order[2]+2] = block3_third_col[l]
     
 if __name__ == '__main__':
     example_board = [
@@ -95,4 +160,4 @@ if __name__ == '__main__':
     #print(solve_sudoku(example_board))
     #pprint(example_board)
 
-    pprint(sudoku_generator())
+    print(sudoku_generator())
