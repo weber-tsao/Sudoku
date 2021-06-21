@@ -1,5 +1,6 @@
 from pprint import pprint
 import random
+import copy
 
 new_sudoku = [[-1 for col in range(9)] for row in range(9)]
 
@@ -142,6 +143,35 @@ def swap_col_block(puzzle):
         puzzle[l][origin_order[2]] = block3_first_col[l]
         puzzle[l][origin_order[2]+1] = block3_second_col[l]
         puzzle[l][origin_order[2]+2] = block3_third_col[l]
+
+def get_non_empty_squares(puzzle):
+    row = []
+    col = []
+    for x in range(81):
+        r=x//9
+        c=x%9
+        if puzzle[r][c] > 0:
+            row.append(r)
+            col.append(c) 
+    return row, col
+        
+def create_puzzle(puzzle):
+    """remove numbers from the puzzle to create the puzzle"""
+    #get all non-empty squares from the puzzle
+    non_empty_squares_row, non_empty_squares_col = get_non_empty_squares(puzzle)
+    non_empty_squares_count = len(non_empty_squares_row)
+    
+    while non_empty_squares_count >= 28:
+        #there should be at least 17 clues
+        random_number = random.randint(0, non_empty_squares_count-1)
+        row = non_empty_squares_row.pop(random_number)
+        col = non_empty_squares_col.pop(random_number)
+        non_empty_squares_count -= 1
+        #might need to put the square value back if there is more than one solution
+        removed_square = puzzle[row][col]
+        puzzle[row][col]=0
+        
+    return puzzle
     
 if __name__ == '__main__':
     example_board = [
@@ -157,7 +187,22 @@ if __name__ == '__main__':
         [6, 7, -1,   1, -1, 5,   -1, 4, -1],
         [1, -1, 9,   -1, -1, -1,   2, -1, -1]
     ]
+    
+    x = [[2, 3, 4, 8, 6, 7, 1, 9, 5],
+            [8, 5, 6, 3, 9, 1, 2, 4, 7],
+            [7, 1, 9, 4, 2, 5, 8, 6, 3],
+            [5, 2, 1, 9, 3, 8, 6, 7, 4],
+            [9, 6, 8, 7, 5, 4, 3, 1, 2],
+            [4, 7, 3, 2, 1, 6, 9, 5, 8],
+            [6, 9, 2, 5, 4, 3, 7, 8, 1],
+            [1, 8, 5, 6, 7, 2, 4, 3, 9],
+            [3, 4, 7, 1, 8, 9, 5, 2, 6]]
     #print(solve_sudoku(example_board))
     #pprint(example_board)
-
-    print(sudoku_generator())
+    
+    #print(sudoku_generator())
+    #print(get_non_empty_squares(example_board))
+    pprint(create_puzzle(x))
+    print(solve_sudoku(create_puzzle(x)))
+    
+    
