@@ -74,8 +74,10 @@ def sudoku_generator():
     swap_row_block(example_solution)
     swap_col(example_solution)
     swap_col_block(example_solution)
+    #pprint(example_solution)
     
-    pprint(example_solution)
+    return example_solution
+    
 
 def swap_row(puzzle):
     for x in range(3):
@@ -173,7 +175,7 @@ def create_puzzle(puzzle):
         
     return puzzle
     
-if __name__ == '__main__':
+'''if __name__ == '__main__':
     example_board = [
         [3, 9, -1,   -1, 5, -1,   -1, -1, -1],
         [-1, -1, -1,   2, -1, -1,   -1, -1, 5],
@@ -188,23 +190,15 @@ if __name__ == '__main__':
         [1, -1, 9,   -1, -1, -1,   2, -1, -1]
     ]
     
-    x = [[2, 3, 4, 8, 6, 7, 1, 9, 5],
-            [8, 5, 6, 3, 9, 1, 2, 4, 7],
-            [7, 1, 9, 4, 2, 5, 8, 6, 3],
-            [5, 2, 1, 9, 3, 8, 6, 7, 4],
-            [9, 6, 8, 7, 5, 4, 3, 1, 2],
-            [4, 7, 3, 2, 1, 6, 9, 5, 8],
-            [6, 9, 2, 5, 4, 3, 7, 8, 1],
-            [1, 8, 5, 6, 7, 2, 4, 3, 9],
-            [3, 4, 7, 1, 8, 9, 5, 2, 6]]
+    #x = sudoku_generator()
     #print(solve_sudoku(example_board))
     #pprint(example_board)
     
     #print(sudoku_generator())
     #print(get_non_empty_squares(example_board))
-    pprint(create_puzzle(x))
-    print(solve_sudoku(x))
-    pprint(x)
-    
+    #pprint(create_puzzle(x))
+    #print(solve_sudoku(x))
+    #pprint(x)
+    '''
     
     
