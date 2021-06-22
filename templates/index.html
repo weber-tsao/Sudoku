@@ -61,10 +61,18 @@ p{
 </table>
 
 <div class="d-flex justify-content-center">
-    <button type="button" class="btn btn-dark">Change board</button>
+    <form  method="post" action="sudoku">
+        <button type="submit" name="change_board" value="submit" class="btn btn-dark">Change board</button>
+    </form>
     <p></p>
-    <button type="button" class="btn btn-dark">Submit</button>
+    <form  method="post" action="sudoku">
+        <button type="submit" name="check_answer" value="submit" class="btn btn-dark">Check your answer</button>
+    </form>
     <p></p>
-    <button type="button" class="btn btn-dark">See solution</button>
+    <form  method="post" action="sudoku">
+        <button type="submit" name="see_solution" value="submit" class="btn btn-dark">See solution</button>
+    </form>
 </div>
+
+
 {% endblock %}
