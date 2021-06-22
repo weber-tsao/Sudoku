@@ -169,7 +169,7 @@ def create_puzzle(puzzle):
         non_empty_squares_count -= 1
         #might need to put the square value back if there is more than one solution
         removed_square = puzzle[row][col]
-        puzzle[row][col]=0
+        puzzle[row][col] = -1
         
     return puzzle
     
@@ -203,6 +203,8 @@ if __name__ == '__main__':
     #print(sudoku_generator())
     #print(get_non_empty_squares(example_board))
     pprint(create_puzzle(x))
-    print(solve_sudoku(create_puzzle(x)))
+    print(solve_sudoku(x))
+    pprint(x)
+    
     
     
