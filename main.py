@@ -25,7 +25,8 @@ def sudoku():
             input_number = request.form.getlist('num')
             row = request.form.getlist('row')
             col = request.form.getlist('column')
-            return render_template("index.html", x = current_board, y = 0)
+            new_board = place_number_in_square(random_board, input_number, row, col)
+            return render_template("index.html", x = new_board, y = 0)
         
         elif request.form.get("see_solution"):
             solve_sudoku(random_board)

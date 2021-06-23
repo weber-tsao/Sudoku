@@ -175,12 +175,16 @@ def create_puzzle(puzzle):
         
     return puzzle
 
-'''def place_number_in_square(puzzle, input_number, row_list, col_list):
-    
-                
-    
-    
-    return puzzle'''
+def place_number_in_square(puzzle, input_number, row_list, col_list):
+    board = copy.deepcopy(puzzle)
+    for count in range(len(input_number)):
+        r = int(row_list[count])
+        c = int(col_list[count])
+        if input_number[count] != '':
+            board[r][c] = int(input_number[count])
+            #print(type(int(input_number[count])))
+            #print(puzzle[r][c])
+    return board
     
     
 '''if __name__ == '__main__':
@@ -206,7 +210,7 @@ def create_puzzle(puzzle):
     #print(get_non_empty_squares(example_board))
     #pprint(create_puzzle(x))
     #print(solve_sudoku(x))
-    #pprint(x)
-    '''
+    #pprint(x)'''
+    
     
     
