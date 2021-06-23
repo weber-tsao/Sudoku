@@ -43,22 +43,28 @@ input[type="text"], textarea {
 p{
     margin: 0 1%;
 }
+
 </style>
-<table class = "center", id="sudoku">
-    <tbody> 
-        {% for r in range(9) %}
-            <tr>
-            {% for c in range(9) %}
-                {% if x[r][c] > 0 %}
-                    <td>{{x[r][c]}}</td>
-                {% else %}
-                    <td><input type="text" /></td>
-                {% endif %}
+<form method="post" action="sudoku">
+    <table class = "center", id="sudoku">
+        <tbody> 
+            {% for r in range(9) %}
+                <tr>
+                {% for c in range(9) %}
+                    {% if x[r][c] > 0 %}
+                        <td>{{x[r][c]}}</td>
+                    {% else %}
+                        <td><input type="text" name="num" /></td>
+                        <input type="hidden" name="row" value="{{r}}" />
+                        <input type="hidden" name="column" value="{{c}}" />
+                    {% endif %}
+                {% endfor %}
+                </tr>
             {% endfor %}
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        </tbody>
+    </table>
+     <button type="submit" name="check_answer" value="submit" class="btn btn-dark">Check</button>
+</form>
 
 <div class="d-flex justify-content-center">
     <form  method="post" action="sudoku">
@@ -73,6 +79,25 @@ p{
         <button type="submit" name="see_solution" value="submit" class="btn btn-dark">See solution</button>
     </form>
 </div>
+
+{% if y != 0%}
+    <table class = "center", id="sudoku">
+    <caption>Solution</caption>
+        <tbody> 
+            {% for r in range(9) %}
+                <tr>
+                {% for c in range(9) %}
+                    {% if y[r][c] > 0 %}
+                        <td>{{y[r][c]}}</td>
+                    {% else %}
+                        <td><input type="text" name="text" /></td>
+                    {% endif %}
+                {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
 
 
 {% endblock %}

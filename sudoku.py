@@ -174,6 +174,14 @@ def create_puzzle(puzzle):
         puzzle[row][col] = -1
         
     return puzzle
+
+'''def place_number_in_square(puzzle, input_number, row_list, col_list):
+    
+                
+    
+    
+    return puzzle'''
+    
     
 '''if __name__ == '__main__':
     example_board = [
