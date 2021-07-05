@@ -182,8 +182,6 @@ def place_number_in_square(puzzle, input_number, row_list, col_list):
         c = int(col_list[count])
         if input_number[count] != '':
             board[r][c] = int(input_number[count])
-            #print(type(int(input_number[count])))
-            #print(puzzle[r][c])
     return board
     
     

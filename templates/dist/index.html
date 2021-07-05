@@ -45,7 +45,7 @@ p{
 }
 
 </style>
-<form method="post" action="sudoku">
+<form method="post" action="#">
     <table class = "center", id="sudoku">
         <tbody> 
             {% for r in range(9) %}
@@ -67,15 +67,15 @@ p{
 </form>
 
 <div class="d-flex justify-content-center">
-    <form  method="post" action="sudoku">
+    <form  method="post" action="#">
         <button type="submit" name="change_board" value="submit" class="btn btn-dark">Change board</button>
     </form>
     <p></p>
-    <form  method="post" action="sudoku">
+    <form  method="post" action="#">
         <button type="submit" name="check_answer" value="submit" class="btn btn-dark">Check your answer</button>
     </form>
     <p></p>
-    <form  method="post" action="sudoku">
+    <form  method="post" action="#">
         <button type="submit" name="see_solution" value="submit" class="btn btn-dark">See solution</button>
     </form>
 </div>
