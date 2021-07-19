@@ -15,29 +15,32 @@ current_board = copy.deepcopy(random_board)
 def sudoku():
     
     if request.method == "POST":
+        global random_board
+        global current_board
         if request.form.get("change_board"):
-            global random_board 
             random_board = create_puzzle(sudoku_generator())
-            global current_board 
             current_board = copy.deepcopy(random_board)
             return render_template("index.html", x = random_board, y = 0)
         
-        elif request.form.get("check_answer"):
+        elif request.form.get("enter_answer"):
             input_number = request.form.getlist('num')
             row = request.form.getlist('row')
             col = request.form.getlist('column')
-            new_board = place_number_in_square(random_board, input_number, row, col)
-            return render_template("index.html", x = new_board, y = 0)
+            current_board = place_number_in_square(current_board, input_number, row, col)
+            return render_template("index.html", x = current_board, y = 0)
         
         elif request.form.get("see_solution"):
             solve_sudoku(random_board)
             return render_template("index.html", x = current_board, y = random_board)
         
-        else: 
+        elif request.form.get("submit_answer"):
+            return render_template("index.html", x = random_board, y = 0)
+        
+        else:
             return render_template("index.html", x = random_board, y = 0)
         
     else:
-        return render_template("index.html", x = random_board, y = 0)
+        return render_template("index.html", x = current_board, y = 0)
 
 if __name__ == "__main__":
     app.debug = True
