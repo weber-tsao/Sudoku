@@ -20,27 +20,29 @@ def sudoku():
         if request.form.get("change_board"):
             random_board = create_puzzle(sudoku_generator())
             current_board = copy.deepcopy(random_board)
-            return render_template("index.html", x = random_board, y = 0)
+            return render_template("index.html", x = random_board, y = 0, matched = False)
         
         elif request.form.get("enter_answer"):
             input_number = request.form.getlist('num')
             row = request.form.getlist('row')
             col = request.form.getlist('column')
             current_board = place_number_in_square(current_board, input_number, row, col)
-            return render_template("index.html", x = current_board, y = 0)
+            return render_template("index.html", x = current_board, y = 0, matched = False)
         
         elif request.form.get("see_solution"):
             solve_sudoku(random_board)
-            return render_template("index.html", x = current_board, y = random_board)
+            return render_template("index.html", x = current_board, y = random_board, matched = False)
         
         elif request.form.get("submit_answer"):
-            return render_template("index.html", x = random_board, y = 0)
+            solve_sudoku(random_board)
+            matched = compare_sudoku(random_board, current_board)
+            return render_template("index.html", x = current_board, y = 0, matched = matched)
         
         else:
-            return render_template("index.html", x = random_board, y = 0)
+            return render_template("index.html", x = random_board, y = 0, matched = False)
         
     else:
-        return render_template("index.html", x = current_board, y = 0)
+        return render_template("index.html", x = current_board, y = 0, matched = False)
 
 if __name__ == "__main__":
     app.debug = True

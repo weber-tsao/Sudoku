@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Sudoku{% endblock %}
 {% block content %}
+
 <style>
 .center{
     margin-left: auto;
@@ -33,6 +34,7 @@ input {
 	height: 40px;
 	width: 40px;
 	text-align: center;
+    color: red;
 }
 input:hover {
 	background: #ffffff;
@@ -43,6 +45,7 @@ input[type="text"], textarea {
 p{
     margin: 0 1%;
 }
+
 
 </style>
 <form method="post" action="#">
@@ -99,5 +102,8 @@ p{
     </table>
 {% endif %}
 
+{% if matched %}
+    <caption>00</caption>
+{% endif %}
 
 {% endblock %}

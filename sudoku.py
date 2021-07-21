@@ -36,7 +36,7 @@ def is_valid(puzzle, guess, row, col):
     return True
         
 def solve_sudoku(puzzle):
-    # solve sudoku using backtracking!
+    # solve sudoku using backtracking
     # our puzzle is a list of lists, where each inner list is a row in our sudoku puzzle
     # return solution
     row, col = find_next_empty(puzzle)
@@ -54,6 +54,15 @@ def solve_sudoku(puzzle):
         puzzle[row][col] = -1
             
     return False
+
+def compare_sudoku(answer, current):
+    matched = True
+    
+    for r in range(9):
+        for c in range(9):
+            if answer[r][c] != current[r][c]:
+                matched = False            
+    return matched
 
 def sudoku_generator():
     example_solution = [
